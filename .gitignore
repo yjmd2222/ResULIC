@@ -181,3 +181,7 @@ notes/
 
 # weights
 weights/
+
+# local archives / datasets
+archive.zip
+data/test/kodak/image/kodim*.png
