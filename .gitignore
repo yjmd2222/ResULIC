@@ -172,3 +172,12 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# notes
+notes/
+
+# paper
+4. Residual-Guided Ultra Lowrate Image Compression (ResULIC).pdf
+
+# weights
+weights/
