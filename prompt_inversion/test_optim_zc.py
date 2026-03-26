@@ -16,7 +16,7 @@ from pytorch_msssim import ms_ssim
 from typing import Any, Mapping
 import torch.nn.functional as F
 from torchvision import transforms
-from pytorch_lightning import seed_everything
+from lightning.pytorch import seed_everything
 from scipy.optimize import fmin_l_bfgs_b
 from ldm.modules.encoders.modules import FrozenOpenCLIPImageEmbedder
 from model.ddim_zc import DDIMSampler

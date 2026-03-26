@@ -1,5 +1,5 @@
 import torch
-import pytorch_lightning as pl
+import lightning.pytorch as pl
 import torch.nn.functional as F
 from contextlib import contextmanager
 
@@ -216,4 +216,3 @@ class IdentityFirstStage(torch.nn.Module):
 
     def forward(self, x, *args, **kwargs):
         return x
-

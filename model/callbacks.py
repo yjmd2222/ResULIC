@@ -2,14 +2,12 @@ from typing import Dict, Any
 import os
 
 import numpy as np
-import pytorch_lightning as pl
-from pytorch_lightning.callbacks import ModelCheckpoint
-from pytorch_lightning.utilities.types import STEP_OUTPUT
+import lightning.pytorch as pl
+from lightning.pytorch.callbacks import Callback, ModelCheckpoint
+from lightning.pytorch.utilities.rank_zero import rank_zero_only
 import torch
 import torchvision
 from PIL import Image
-from pytorch_lightning.callbacks import Callback
-from pytorch_lightning.utilities.distributed import rank_zero_only
 
 from .mixins import ImageLoggerMixin
 
@@ -45,8 +43,8 @@ class ImageLogger(Callback):
 
     @rank_zero_only
     def on_train_batch_end(
-        self, trainer: pl.Trainer, pl_module: pl.LightningModule, outputs: STEP_OUTPUT,
-        batch: Any, batch_idx: int, dataloader_idx: int
+        self, trainer: pl.Trainer, pl_module: pl.LightningModule, outputs: Any,
+        batch: Any, batch_idx: int, dataloader_idx: int = 0
     ) -> None:
         if not self.has_logged_initial or (
             pl_module.global_step % self.log_every_n_steps == 0 and pl_module.global_step > self.log_start_step

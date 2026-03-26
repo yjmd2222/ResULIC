@@ -8,7 +8,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '5'
 import numpy as np
 import torch
 import einops
-import pytorch_lightning as pl
+import lightning.pytorch as pl
 from PIL import Image
 from omegaconf import OmegaConf
 

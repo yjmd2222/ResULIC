@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 import os
-import pytorch_lightning as pl
+import lightning.pytorch as pl
 from omegaconf import OmegaConf
 import torch
 from torchvision import transforms
@@ -8,6 +8,26 @@ from dataset.data_LSDIR import MyDataset
 from dataset.data_Flicker import MyDataset2
 from torch.utils.data import ConcatDataset, DataLoader
 from utils.common import instantiate_from_config, load_state_dict
+
+
+def normalize_trainer_kwargs(trainer_cfg):
+    kwargs = dict(trainer_cfg)
+    accelerator = kwargs.get("accelerator")
+    strategy = kwargs.get("strategy")
+    gpus = kwargs.pop("gpus", None)
+
+    if accelerator == "ddp":
+        kwargs["accelerator"] = "gpu"
+        kwargs.setdefault("strategy", "ddp")
+
+    if strategy == "ddp" and kwargs.get("accelerator") is None:
+        kwargs["accelerator"] = "gpu"
+
+    if gpus is not None and "devices" not in kwargs:
+        kwargs["devices"] = gpus
+        kwargs.setdefault("accelerator", "gpu")
+
+    return kwargs
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 def main() -> None:
@@ -50,7 +70,10 @@ def main() -> None:
     callbacks = []
     for callback_config in config.lightning.callbacks:
         callbacks.append(instantiate_from_config(callback_config))
-    trainer = pl.Trainer(callbacks=callbacks, **config.lightning.trainer)
+    trainer = pl.Trainer(
+        callbacks=callbacks,
+        **normalize_trainer_kwargs(config.lightning.trainer),
+    )
     trainer.fit(model, dataloader)
 
 
