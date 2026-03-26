@@ -4,7 +4,6 @@ from typing import List, Tuple
 import os
 import pandas as pd
 from argparse import ArgumentParser, Namespace
-os.environ['CUDA_VISIBLE_DEVICES'] = '5'
 import numpy as np
 import torch
 import einops
@@ -163,7 +162,7 @@ def parse_args() -> Namespace:
 def main() -> None:
     args = parse_args()
     pl.seed_everything(args.seed)
-    
+
     if args.device == "cpu":
         disable_xformers()  
 

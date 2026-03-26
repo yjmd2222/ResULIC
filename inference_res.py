@@ -184,7 +184,7 @@ def parse_args() -> Namespace:
 def main() -> None:
     args = parse_args()
     pl.seed_everything(args.seed)
-    
+
     if args.device == "cpu":
         disable_xformers()  
 

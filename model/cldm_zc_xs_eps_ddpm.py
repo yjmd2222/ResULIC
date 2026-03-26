@@ -852,12 +852,12 @@ class ControlLDM(LatentDiffusion):
             return aux_loss
         
     def load_preprocess_ckpt(self, ckpt_path_pre):
-        ckpt = torch.load(ckpt_path_pre)
+        ckpt = torch.load(ckpt_path_pre, map_location="cpu", weights_only=False)
         self.preprocess_model.load_state_dict(ckpt)
         print(['CONTROL WEIGHTS LOADED'])
         
     def sync_control_weights_from_base_checkpoint(self, path, synch_control=True):
-        ckpt_base = torch.load(path)  # load the base model checkpoints
+        ckpt_base = torch.load(path, map_location="cpu", weights_only=False)  # load the base model checkpoints
 
         if synch_control:
             # add copy for control_module weights from the base model

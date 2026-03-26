@@ -28,8 +28,6 @@ def normalize_trainer_kwargs(trainer_cfg):
         kwargs.setdefault("accelerator", "gpu")
 
     return kwargs
-
-os.environ['CUDA_VISIBLE_DEVICES'] = '1,2'
 def main() -> None:
     parser = ArgumentParser()
     parser.add_argument("--config", type=str, default='./configs/train_stage2.yaml')

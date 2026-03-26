@@ -25,7 +25,7 @@ class LPIPS(nn.Module):
             param.requires_grad = False
 
     def load_from_pretrained(self, name="vgg_lpips"):
-        ckpt = get_ckpt_path(name, "weight")
+        ckpt = get_ckpt_path(name, "weights")
         self.load_state_dict(torch.load(ckpt, map_location=torch.device("cpu")), strict=False)
         print("loaded pretrained LPIPS loss from {}".format(ckpt))
 
@@ -34,7 +34,7 @@ class LPIPS(nn.Module):
         if name != "vgg_lpips":
             raise NotImplementedError
         model = cls()
-        ckpt = get_ckpt_path(name)
+        ckpt = get_ckpt_path(name, "weights")
         model.load_state_dict(torch.load(ckpt, map_location=torch.device("cpu")), strict=False)
         return model
 
@@ -120,4 +120,3 @@ def normalize_tensor(x,eps=1e-10):
 
 def spatial_average(x, keepdim=True):
     return x.mean([2,3],keepdim=keepdim)
-
