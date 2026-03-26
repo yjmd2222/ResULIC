@@ -1,5 +1,5 @@
  CUDA_VISIBLE_DEVICES=1 python inference_res_pfo.py \
- --ckpt weight/step=84999_stage2_1_1_4_300.ckpt \
+ --ckpt weights/step=84999_stage2_1_1_4_300.ckpt \
  --config configs/model/stage2/1_1_4/cldm_eps_300_ddim.yaml \
  --add_steps 300 \
  --ddim_steps 3 \

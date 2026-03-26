@@ -54,9 +54,9 @@
 #### Stage 1: Initial Training
 
 1. **Download Pretrained Model**  
-   Download the pretrained **Stable Diffusion v2.1** model into the `./weight` directory:
+   Download the pretrained **Stable Diffusion v2.1** model into the `./weights` directory:
    ```bash
-   wget https://huggingface.co/stabilityai/stable-diffusion-2-1-base/resolve/main/v2-1_512-ema-pruned.ckpt --no-check-certificate -P ./weight
+   wget https://huggingface.co/stabilityai/stable-diffusion-2-1-base/resolve/main/v2-1_512-ema-pruned.ckpt --no-check-certificate -P ./weights
 
 2. **Modify the configuration file**`./configs/train_zc_eps.yaml` and `./configs/model/stage1/xx.yaml` accordingly.
 

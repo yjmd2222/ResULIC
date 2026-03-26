@@ -244,7 +244,7 @@ def main() -> None:
     img_results = [] 
 
     clip_model, _, clip_preprocess = open_clip.create_model_and_transforms(args.clip_model, 
-                                                                            pretrained="weight/open_clip_pytorch_model.bin", 
+                                                                            pretrained="weights/open_clip_pytorch_model.bin", 
                                                                             device=model.device)
     
     #df = pd.read_excel(args.excel)
