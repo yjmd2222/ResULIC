@@ -160,11 +160,10 @@ def create_model(
         if pretrained:
             checkpoint_path = ''
             pretrained_cfg = get_pretrained_cfg(model_name, pretrained)
-            # if pretrained_cfg:
-            #     checkpoint_path = download_pretrained(pretrained_cfg, cache_dir=cache_dir)
-            # elif os.path.exists(pretrained):
-            #     checkpoint_path = pretrained
-            checkpoint_path = '/workspace/SRIC/open_clip/open_clip_pytorch_model.bin'
+            if pretrained_cfg:
+                checkpoint_path = download_pretrained(pretrained_cfg, cache_dir=cache_dir)
+            elif os.path.exists(pretrained):
+                checkpoint_path = pretrained
             if checkpoint_path:
                 logging.info(f'Loading pretrained {model_name} weights ({pretrained}).')
                 load_checkpoint(model, checkpoint_path)

@@ -24,12 +24,24 @@ from utils.metrics import calculate_msssim_pt, calculate_psnr_pt, LPIPS
 import prompt_inversion.test_optim_zc as prompt_optmizer
 import prompt_inversion.open_clip as open_clip 
 from nn_indices import arithmetic_decode, arithmetic_encode
-from neuralcompression.metrics import DeepImageStructureTextureSimilarity
 from torchmetrics.image import (
     LearnedPerceptualImagePatchSimilarity,
 )
 from model.color import wavelet_reconstruction, adaptive_instance_normalization
 from gpt import get_residual_caption, get_image_caption
+
+try:
+    from neuralcompression.metrics import DeepImageStructureTextureSimilarity
+except ImportError:
+    class DeepImageStructureTextureSimilarity:
+        def to(self, device):
+            return self
+
+        def update(self, *args, **kwargs):
+            return None
+
+        def compute(self):
+            return torch.tensor(float("nan"))
 
 
 def decode_ids(input_ids, tokenizer, by_token=False):
