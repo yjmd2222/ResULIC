@@ -5,7 +5,7 @@ from torch.utils.checkpoint import checkpoint
 
 from transformers import T5Tokenizer, T5EncoderModel, CLIPTokenizer, CLIPTextModel
 
-import open_clip
+import prompt_inversion.open_clip as open_clip
 from ldm.util import default, count_params, autocast
 
 
